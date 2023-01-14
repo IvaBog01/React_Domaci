@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Game from '../components/Game';
 import { TOPICS, useWord } from '../hooks/useWord';
 
-export default function GamePage() {
+export default function GamePage({ onOver }) {
     const [selectedTopic, setSelectedTopic] = useState('');
     const sentence = useWord(selectedTopic);
     return (
@@ -17,7 +17,7 @@ export default function GamePage() {
             </div>
             {
                 sentence && (
-                    <Game sentence={sentence} />
+                    <Game sentence={sentence} onOver={onOver} />
                 )
             }
         </div>

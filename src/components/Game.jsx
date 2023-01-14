@@ -8,13 +8,24 @@ export default function Game({ sentence, onOver }) {
     const [triesLeft, setTriesLeft] = useState(5);
 
     const won = isSentenceMatched(sentence, usedLetters);
+    const isOver = triesLeft === 0 || won;
 
     useEffect(() => {
         setUsedLetters([]);
         setTriesLeft(5);
     }, [sentence])
 
-    const isOver = triesLeft === 0 || won;
+    useEffect(() => {
+        if (!isOver) {
+            return;
+        }
+        onOver({
+            sentence,
+            usedLetters,
+            won
+        })
+    }, [isOver])
+
 
     return (
         <div>

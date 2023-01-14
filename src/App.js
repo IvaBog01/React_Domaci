@@ -4,14 +4,18 @@ import Navbar from './components/Navbar';
 import GamePage from './pages/GamePage';
 import HistoryPage from './pages/HistoryPage';
 import StatsPage from './pages/StatsPage';
+import { useState } from 'react';
 
 function App() {
+  const [gameHistory, setGameHistory] = useState([]);
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path='/' element={<GamePage />} />
-        <Route path='/history' element={<HistoryPage />} />
+        <Route path='/' element={<GamePage onOver={game => {
+          setGameHistory(prev => [...prev, game])
+        }} />} />
+        <Route path='/history' element={<HistoryPage games={gameHistory} />} />
         <Route path='/statistics' element={<StatsPage />} />
       </Routes>
     </BrowserRouter>
