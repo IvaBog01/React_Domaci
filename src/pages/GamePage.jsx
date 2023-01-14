@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import Game from '../components/Game';
 import { TOPICS, useWord } from '../hooks/useWord';
 
 export default function GamePage() {
     const [selectedTopic, setSelectedTopic] = useState('');
-    const word = useWord(selectedTopic);
+    const sentence = useWord(selectedTopic);
     return (
         <div className='container mt-3'>
             <div className='my-2'>
@@ -14,6 +15,11 @@ export default function GamePage() {
                     <option value={TOPICS.TECH}>Tech terms</option>
                 </select>
             </div>
+            {
+                sentence && (
+                    <Game sentence={sentence} />
+                )
+            }
         </div>
     )
 }

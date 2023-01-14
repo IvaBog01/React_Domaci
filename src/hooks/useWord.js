@@ -7,7 +7,6 @@ export const TOPICS = {
     USELESSFACTS: 'useless',
     TECH: 'tech'
 }
-
 export function useWord(topic) {
     const [word, setWord] = useState('');
 
