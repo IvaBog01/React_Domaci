@@ -16,7 +16,7 @@ function App() {
           setGameHistory(prev => [...prev, game])
         }} />} />
         <Route path='/history' element={<HistoryPage games={gameHistory} />} />
-        <Route path='/statistics' element={<StatsPage />} />
+        <Route path='/statistics' element={<StatsPage games={gameHistory} />} />
       </Routes>
     </BrowserRouter>
   );
