@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { isSentenceMatched } from '../wordHelper';
+import Letters from './Letters';
 import Word from './Word'
 
 export default function Game({ sentence, onOver }) {
@@ -8,15 +9,55 @@ export default function Game({ sentence, onOver }) {
 
     const won = isSentenceMatched(sentence, usedLetters);
 
+    useEffect(() => {
+        setUsedLetters([]);
+        setTriesLeft(5);
+    }, [sentence])
+
+    const isOver = triesLeft === 0 || won;
+
     return (
-        <div className='flexRow mt-5'>
+        <div>
             {
-                sentence.split(' ').map(word => {
-                    return (
-                        <Word word={word} usedLetters={usedLetters} />
-                    )
-                })
+                won && (
+                    <div className='m-3 text-center'>
+                        Congratulations, you won
+                    </div>
+                )
             }
+            {
+                triesLeft === 0 && (
+                    <div className='m-3 text-center'>
+                        You lost
+                    </div>
+                )
+            }
+            {
+                !isOver && (
+                    <div className='m-3 text-center'>
+                        Tries left: {triesLeft}
+                    </div>
+                )
+            }
+            <div className='flexRow mt-5'>
+                {
+                    sentence.split(' ').map(word => {
+                        return (
+                            <Word word={word} usedLetters={usedLetters} />
+                        )
+                    })
+                }
+                <Letters
+                    usedLetters={usedLetters}
+                    isOver={isOver}
+                    onLetterClick={letter => {
+                        setUsedLetters(prev => [...prev, letter]);
+                        if (!sentence.includes(letter.toLocaleLowerCase())) {
+                            setTriesLeft(prev => prev - 1);
+                        }
+                    }}
+                />
+            </div>
         </div>
     )
 }
