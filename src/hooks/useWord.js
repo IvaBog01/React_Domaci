@@ -32,6 +32,5 @@ export function useWord(topic) {
     }, [topic])
 
     return word;
-
 }
 

@@ -14,7 +14,7 @@ export default function HistoryPage({ games }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {games.reverse().map(game => {
+                    {games.slice().reverse().map(game => {
                         return (
                             <tr key={game.sentence}>
                                 <td>{game.sentence}</td>

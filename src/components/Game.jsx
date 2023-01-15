@@ -26,7 +26,6 @@ export default function Game({ sentence, onOver }) {
         })
     }, [isOver])
 
-
     return (
         <div>
             {
@@ -63,7 +62,7 @@ export default function Game({ sentence, onOver }) {
                     isOver={isOver}
                     onLetterClick={letter => {
                         setUsedLetters(prev => [...prev, letter]);
-                        if (!sentence.includes(letter.toLocaleLowerCase())) {
+                        if (sentence.split('').find(l => l.toLocaleLowerCase() === letter) === undefined) {
                             setTriesLeft(prev => prev - 1);
                         }
                     }}
